@@ -7,6 +7,8 @@
 oryxBuildBinary
 __debug_bin
 
+sshesame
+
 # Test binary, built with `go test -c`
 *.test
 
