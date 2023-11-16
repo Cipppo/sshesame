@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"os/exec"
 	"strconv"
 	"strings"
 )
@@ -24,12 +25,14 @@ type command interface {
 }
 
 var commands = map[string]command{
-	"sh":    cmdShell{},
-	"true":  cmdTrue{},
-	"false": cmdFalse{},
-	"echo":  cmdEcho{},
-	"cat":   cmdCat{},
-	"su":    cmdSu{},
+	"sh":     cmdShell{},
+	"true":   cmdTrue{},
+	"false":  cmdFalse{},
+	"echo":   cmdEcho{},
+	"cat":    cmdCat{},
+	"su":     cmdSu{},
+	"whoami": cmdWhoami{},
+	"ls":     cmdLs{},
 }
 
 var shellProgram = []string{"sh"}
@@ -105,10 +108,38 @@ func (cmdFalse) execute(context commandContext) (uint32, error) {
 	return 1, nil
 }
 
+type cmdWhoami struct{}
+
+func (cmdWhoami) execute(context commandContext) (uint32, error) {
+	cmd := exec.Command("whoami")
+	out, err := cmd.Output()
+
+	if err != nil {
+		fmt.Fprintln(context.stdout, err)
+	}
+
+	fmt.Fprint(context.stdout, string(out))
+	return 0, err
+}
+
+type cmdLs struct{}
+
+func (cmdLs) execute(context commandContext) (uint32, error) {
+	cmd := exec.Command("ls")
+	out, err := cmd.Output()
+
+	if err != nil {
+		fmt.Fprintln(context.stderr, err)
+	}
+
+	fmt.Fprint(context.stdout, string(out))
+	return 0, err
+}
+
 type cmdEcho struct{}
 
 func (cmdEcho) execute(context commandContext) (uint32, error) {
-	_, err := fmt.Fprintln(context.stdout, strings.Join(context.args[1:], " "))
+	_, err := fmt.Fprintln(context.stdout, strings.Join(context.args[1:], "a"))
 	return 0, err
 }
 
