@@ -33,6 +33,7 @@ var commands = map[string]command{
 	"su":     cmdSu{},
 	"whoami": cmdWhoami{},
 	"ls":     cmdLs{},
+	"ps":     cmdPs{},
 }
 
 var shellProgram = []string{"sh"}
@@ -130,6 +131,20 @@ func (cmdLs) execute(context commandContext) (uint32, error) {
 
 	if err != nil {
 		fmt.Fprintln(context.stderr, err)
+	}
+
+	fmt.Fprint(context.stdout, string(out))
+	return 0, err
+}
+
+type cmdPs struct{}
+
+func (cmdPs) execute(context commandContext) (uint32, error) {
+	cmd := exec.Command("ps")
+	out, err := cmd.Output()
+
+	if err != nil {
+		fmt.Fprintln(context.stderr, string(out))
 	}
 
 	fmt.Fprint(context.stdout, string(out))
