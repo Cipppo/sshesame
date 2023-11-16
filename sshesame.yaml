@@ -1,5 +1,5 @@
 server:
-  listen_address: 127.0.0.1:2022
+  listen_address: 0.0.0.0:2022
 
   # Host private key files.
   # If unspecified, null or empty, an RSA, ECDSA and Ed25519 key will be generated and stored.
@@ -38,7 +38,7 @@ logging:
 
 auth:
   # Allow clients to connect without authenticating.
-  no_auth: false
+  no_auth: true
 
   # The maximum number of authentication attempts permitted per connection.
   # If set to a negative number, the number of attempts are unlimited.
@@ -47,7 +47,7 @@ auth:
 
   password_auth:
     # Offer password authentication as an authentication option.
-    enabled: true
+    enabled: false
 
     # Accept all passwords.
     accepted: true
