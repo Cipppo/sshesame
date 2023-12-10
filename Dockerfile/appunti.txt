@@ -1,7 +1,0 @@
-Porco dio
-
-
-andando a fare un ssh alla porta 2023 dell'ip del container sembra andare ma non da output, il mio 
-pensiero è che non abbia modo di darmi una shell, a sto punto proverei con un compose tra questa merda 
-e una macchina ubuntu ma non so come funziona.
-:)
