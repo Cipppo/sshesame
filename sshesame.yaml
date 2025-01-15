@@ -36,18 +36,21 @@ logging:
   # When logging in JSON, log addresses as objects including the hostname and the port instead of strings.
   split_host_port: false
 
+  #Port to serve logs on ELK Stack
+  elk_address: :8080
+
 auth:
   # Allow clients to connect without authenticating.
-  no_auth: true
+  no_auth: false
 
   # The maximum number of authentication attempts permitted per connection.
   # If set to a negative number, the number of attempts are unlimited.
   # If unspecified, null or zero, a sensible default is used.
-  max_tries: 0
+  max_tries: -1
 
   password_auth:
     # Offer password authentication as an authentication option.
-    enabled: false
+    enabled: true
 
     # Accept all passwords.
     accepted: true
