@@ -33,6 +33,7 @@ type loggingConfig struct {
 	MetricsAddress string `yaml:"metrics_address"`
 	Debug          bool   `yaml:"debug"`
 	SplitHostPort  bool   `yaml:"split_host_port"`
+	ElkAddress     string `yaml:"elk_address"`
 }
 
 type commonAuthConfig struct {
