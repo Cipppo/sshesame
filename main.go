@@ -89,5 +89,4 @@ func main() {
 		}
 		go handleConnection(conn, cfg)
 	}
-
 }
